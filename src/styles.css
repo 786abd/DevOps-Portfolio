@@ -1,0 +1,152 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-terminal: var(--terminal);
+  --color-glow: var(--glow);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Deep infra-night palette */
+  --background: oklch(0.16 0.02 240);
+  --foreground: oklch(0.96 0.01 200);
+  --card: oklch(0.20 0.025 240);
+  --card-foreground: oklch(0.96 0.01 200);
+  --popover: oklch(0.20 0.025 240);
+  --popover-foreground: oklch(0.96 0.01 200);
+
+  /* Electric cyan — primary accent */
+  --primary: oklch(0.82 0.16 195);
+  --primary-foreground: oklch(0.16 0.02 240);
+
+  /* Emerald — secondary accent for "running/online" */
+  --secondary: oklch(0.78 0.18 160);
+  --secondary-foreground: oklch(0.16 0.02 240);
+
+  --muted: oklch(0.24 0.02 240);
+  --muted-foreground: oklch(0.68 0.02 220);
+  --accent: oklch(0.30 0.04 240);
+  --accent-foreground: oklch(0.96 0.01 200);
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.28 0.025 240);
+  --input: oklch(0.24 0.02 240);
+  --ring: oklch(0.82 0.16 195);
+
+  --terminal: oklch(0.12 0.02 240);
+  --glow: oklch(0.82 0.16 195 / 0.35);
+
+  --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.82 0.16 195 / 0.18), transparent 60%);
+  --gradient-grid: linear-gradient(oklch(0.28 0.025 240 / 0.6) 1px, transparent 1px), linear-gradient(90deg, oklch(0.28 0.025 240 / 0.6) 1px, transparent 1px);
+  --shadow-glow: 0 0 40px -8px var(--glow);
+  --shadow-card: 0 1px 0 oklch(1 0 0 / 0.04) inset, 0 20px 40px -20px oklch(0 0 0 / 0.5);
+}
+
+.dark {
+  --background: oklch(0.16 0.02 240);
+  --foreground: oklch(0.96 0.01 200);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-mono { font-family: var(--font-mono); }
+
+  .bg-grid {
+    background-image: var(--gradient-grid);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, black, transparent 80%);
+  }
+
+  .bg-hero-glow {
+    background: var(--gradient-hero);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 24px var(--glow);
+  }
+
+  .border-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .terminal-card {
+    background: var(--color-terminal);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+  }
+
+  .blink::after {
+    content: "▋";
+    margin-left: 2px;
+    animation: blink 1s steps(2) infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .scroll-x {
+    animation: scroll-x 40s linear infinite;
+  }
+
+  @keyframes scroll-x {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
