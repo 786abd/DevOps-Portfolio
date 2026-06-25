@@ -42,7 +42,7 @@ import { Database, HardDrive, Zap as ZapIcon, Server as ServerIcon } from "lucid
 import heroInfra from "@/assets/hero-infra.jpg";
 import projectPipeline from "@/assets/project-pipeline.jpg";
 import projectMonitoring from "@/assets/project-monitoring.jpg";
-import portrait from "@/assets/portrait.jpg";
+import portrait from "@/assets/Abd-portfolio.png";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
